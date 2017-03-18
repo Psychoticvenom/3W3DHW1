@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<div id='light0' style='text-align : center; margin : 0% 40% 0.5% 40%; width : 20%; height:20px; background-color : rgb(150,255,0)'>
+light0
+</div>
+<div id='light1' style='text-align : center; float : left; margin : 0.5% 2.5% 0.5% 27.5%; width:20%; height:20px; background-color : rgb(150,255,0)'>
+light1
+</div>
+<div id='light2' style='text-align : center; float : left; margin : 0.5% 27.5% 0.5% 2.5%; width:20%; height:20px; background-color : rgb(150,255,0)'>
+light2
+</div><br>
+<div id='light3' style='text-align : center; float:left; margin : 0.5% 2.5% 0.5% 15%; width:20%; height:20px; background-color : rgb(150,255,0)'>
+light3
+</div>
+<div id='light4' style='text-align : center; float:left; margin : 0.5% 2.5% 0.5% 2.5%; width:20%; height:20px; background-color : rgb(150,255,0)'>
+light4
+</div>
+<div id='light5' style='text-align : center; float:left; margin : 0.5% 15% 0.5% 2.5%; width:20%; height:20px; background-color : rgb(150,255,0)'>
+light5
+</div><br>
+<div id='light6' style='text-align : center; float:left; margin : 0.5% 2.5% 0.5% 2.5%; width:20%; height:20px; background-color : rgb(150,255,0)'>
+light6
+</div>
+<div id='light7' style='text-align : center; float:left; margin : 0.5% 2.5% 0.5% 2.5%; width:20%; height:20px; background-color : rgb(150,255,0)'>
+light7
+</div>
+<div id='light8' style='text-align : center; float:left; margin : 0.5% 2.5% 0.5% 2.5%; width:20%; height:20px; background-color : rgb(150,255,0)'>
+light8
+</div>
+<div id='light9' style='text-align : center; float:left; margin : 0.5% 2.5% 0.5% 2.5%; width:20%; height:20px; background-color : rgb(150,255,0)'>
+light9
+</div>
+<div style='text-align : center; margin : 7% 35% 0% 35%; width:30%; height:30px; color : white; background-color : rgb(135,50,35)'>
+light10
+</div>
+<div style='text-align : center; margin : auto; width:30%; height:30px; color : white; background-color : rgb(135,50,35)'>
+light11
+</div>
+<div style='text-align : center; margin : auto; width:30%; height:30px; color : white; background-color : rgb(135,50,35)'>
+light12
+</div>
+<div style='text-align : center; margin : auto; width:30%; height:30px; color : white; background-color : rgb(135,50,35)'>
+light13
+</div>
+
+<center><button id='toggleMe'>
+Turn on
+</button></center>
+<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+
+</head>
+
+<body> 
+<script>
+
+function Light(lightId) {
+	if(lightId == undefined) {
+  	 Light.serial = Light.serial !== undefined ? ++Light.serial : 0;
+  }
+	var name = '#' + lightId || 'f' + Light.serial;
+  
+  var status = false;
+  
+  var toggle = function() {
+    status = !status;
+    
+    if (status) {
+    	$(name).css ('backgroundColor', 'yellow');
+      $(name).text (name + ' is on');
+    } else {
+    	$(name).css ('backgroundColor', 'rgb(150,255,0)');
+      $(name).text (name + ' is off');
+    }
+  };
+  
+  this.check = function () {
+  	return status;
+  }
+  
+  var timer;
+  var power = false;
+  this.toggleBlink = function(t) { //t = time
+  	power = !power;
+  	if(power){
+    	$('#toggleMe').text('Turn off');
+    	timer = setInterval (function() {toggle();}, t);
+    }
+  	else {
+    	$('#toggleMe').text('Turn on');
+  		clearInterval (timer);
+    }
+  }
+}
+
+var l0 = new Light('light0');
+var l1 = new Light('light1');
+var l2 = new Light('light2');
+var l3 = new Light('light3');
+var l4 = new Light('light4');
+var l5 = new Light('light5');
+var l6 = new Light('light6');
+var l7 = new Light('light7');
+var l8 = new Light('light8');
+var l9 = new Light('light9');
+
+
+$('#toggleMe').click(function () { 
+		l0.toggleBlink(500);
+    l1.toggleBlink(1000);
+    l2.toggleBlink(1000);
+    l3.toggleBlink(800);
+    l4.toggleBlink(500);
+    l5.toggleBlink(800);
+    l6.toggleBlink(1500);
+    l7.toggleBlink(1500);
+    l8.toggleBlink(1500);
+    l9.toggleBlink(1500);
+	}
+);
+
+</script>
+</body>
+
+</html>
